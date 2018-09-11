@@ -1,0 +1,17 @@
+.solution.json
+auto/
+
+# C/C++
+*.o
+*.out
+build/
+
+# D
+.dub/
+
+# Java
+.gradle/
+
+# Python
+__pycache__/
+.pytest_cache
