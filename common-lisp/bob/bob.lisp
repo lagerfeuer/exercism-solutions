@@ -5,21 +5,26 @@
 (in-package #:bob)
 
 (defun response-for (input)
-  (let ((trimmed-input (string-trim (list #\Tab #\Newline #\Page #\Space) input)))
+  (let ((trimmed-input (string-trim
+                        (list #\Tab #\Newline #\Page #\Space) input)))
     (let ((input_len (length trimmed-input)))
-      (flet ((uppercase-and-alpha-p (x) (and
-                                          (string= (string-upcase x) x)
-                                          (some #'alpha-char-p x))))
-        (if (= input_len 0) "Fine. Be that way!"
-          (case (aref trimmed-input (1- input_len))
-            (#\? (if (uppercase-and-alpha-p trimmed-input)
-                     "Calm down, I know what I'm doing!"
-                   "Sure."))
-            (#\!  (if (string= (string-upcase trimmed-input) trimmed-input)
-                      "Whoa, chill out!"
-                    "Whatever."))
-            (otherwise (if (uppercase-and-alpha-p trimmed-input)
-                           "Whoa, chill out!"
-                         "Whatever.")))
-          )
-        ))))
+      (labels ((upcase-p (x) (string= (string-upcase x) x))
+               (uppercase-and-alpha-p (x) (and
+                                           (upcase-p x)
+                                           (some #'alpha-char-p x)))
+               (input-last-char () (aref trimmed-input (1- input_len)))
+               (question-p () (char= #\? (input-last-char)))
+               (yelling-question-p () (and
+                                       (question-p)
+                                       (uppercase-and-alpha-p trimmed-input)))
+               (yelling-p () (and
+                              (char= #\! (input-last-char))
+                              (upcase-p trimmed-input)))
+               (yelling-statement-p () (uppercase-and-alpha-p trimmed-input)))
+
+        (cond ((= input_len 0) "Fine. Be that way!")
+              ((yelling-question-p) "Calm down, I know what I'm doing!")
+              ((question-p) "Sure.")
+              ((yelling-p) "Whoa, chill out!")
+              ((yelling-statement-p) "Whoa, chill out!")
+              (t "Whatever."))))))
