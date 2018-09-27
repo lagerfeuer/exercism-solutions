@@ -1,8 +1,6 @@
 pending :-
     current_prolog_flag(argv, ['--all'|_]).
-pending :-
-    write('\nA TEST IS PENDING!\n'),
-    fail.
+pending :- true.
 
 :- begin_tests(sum_of_multiples).
 
