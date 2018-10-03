@@ -1,36 +1,25 @@
 class Clock
-  attr_accessor :hour, :minute
+  attr_accessor :minutes
 
   def initialize(hour: 0, minute: 0)
-    @hour = hour
-    @minute = minute
-    _normalize
+    @minutes = (hour * 60 + minute) % (24 * 60)
   end
 
   def to_s
-    "%02d:%02d" % [ @hour, @minute ]
+    "%02d:%02d" % [ (@minutes / 60) % 24, @minutes % 60 ]
   end
 
   def +(clock)
-    @hour += clock.hour
-    @minute += clock.minute
-    _normalize
+    @minutes += clock.minutes
     self
   end
 
   def -(clock)
-    @hour -= clock.hour
-    @minute -= clock.minute
-    _normalize
+    @minutes -= clock.minutes
     self
   end
 
   def ==(clock)
-    (@hour == clock.hour) and (@minute == clock.minute)
-  end
-
-  def _normalize
-    @hour = (@hour + @minute / 60) % 24
-    @minute = @minute % 60
+    @minutes == clock.minutes
   end
 end
