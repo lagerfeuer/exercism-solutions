@@ -1,22 +1,25 @@
+HOURS_PER_DAY = 24
+MINUTES_PER_HOUR = 60
+
 class Clock
   attr_accessor :minutes
 
   def initialize(hour: 0, minute: 0)
-    @minutes = (hour * 60 + minute) % (24 * 60)
+    @minutes = (hour * MINUTES_PER_HOUR + minute) \
+      % (HOURS_PER_DAY * MINUTES_PER_HOUR)
   end
 
   def to_s
-    "%02d:%02d" % [ (@minutes / 60) % 24, @minutes % 60 ]
+    "%02d:%02d" % [ (@minutes / MINUTES_PER_HOUR) % HOURS_PER_DAY,
+                    @minutes % MINUTES_PER_HOUR ]
   end
 
   def +(clock)
-    @minutes += clock.minutes
-    self
+    Clock.new(hour: 0, minute: @minutes + clock.minutes)
   end
 
   def -(clock)
-    @minutes -= clock.minutes
-    self
+    Clock.new(hour: 0, minute: @minutes - clock.minutes)
   end
 
   def ==(clock)
