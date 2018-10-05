@@ -3,6 +3,7 @@ MINUTES_PER_HOUR = 60
 
 class Clock
   attr_accessor :minutes
+  protected :minutes
 
   def initialize(hour: 0, minute: 0)
     @minutes = (hour * MINUTES_PER_HOUR + minute) \
@@ -10,8 +11,7 @@ class Clock
   end
 
   def to_s
-    "%02d:%02d" % [ (@minutes / MINUTES_PER_HOUR) % HOURS_PER_DAY,
-                    @minutes % MINUTES_PER_HOUR ]
+    "%02d:%02d" % @minutes.divmod(MINUTES_PER_HOUR)
   end
 
   def +(clock)
