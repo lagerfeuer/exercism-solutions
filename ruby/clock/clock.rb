@@ -23,8 +23,7 @@ class Clock
     @minutes == clock.minutes
   end
 
-  attr_accessor :minutes
-
   protected
-  :minutes
+
+  attr_accessor :minutes
 end
