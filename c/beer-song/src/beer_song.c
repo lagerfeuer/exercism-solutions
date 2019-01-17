@@ -2,36 +2,44 @@
 #include <stdio.h>
 #include <string.h>
 
-void verse(char *buffer, int number) {
-  char old_number_str[3];
-  char new_number_str[3];
-  const char *singular = "bottle";
-  const char *plural = "bottles";
-
-  sprintf(old_number_str, "%d", number);
-  const char *old_bottle = (number == 1) ? singular : plural;
-
-  int new_number;
-  if (number > 0)
-    new_number = number - 1;
-  else
-    new_number = 99;
-  sprintf(new_number_str, "%d", new_number);
-  const char *new_bottle = (new_number == 1) ? singular : plural;
-
-  sprintf(buffer, VERSE_TEMPLATE, (number ? old_number_str : "No more"),
-          old_bottle, (number ? old_number_str : "no more"), old_bottle,
-          (number == 1) ? "it" : "one",
-          (new_number ? new_number_str : "no more"), new_bottle);
+void verse(char* buffer, int number) {
+  switch (number) {
+  case 0:
+    sprintf(buffer, "No more bottles of beer on the wall, "
+                    "no more bottles of beer.\n"
+                    "Go to the store and buy some more, "
+                    "99 bottles of beer on the wall.\n");
+    break;
+  case 1:
+    sprintf(buffer, "1 bottle of beer on the wall, "
+                    "1 bottle of beer.\n"
+                    "Take it down and pass it around, "
+                    "no more bottles of beer on the wall.\n");
+    break;
+  case 2:
+    sprintf(buffer, "2 bottles of beer on the wall, "
+                    "2 bottles of beer.\n"
+                    "Take one down and pass it around, "
+                    "1 bottle of beer on the wall.\n");
+    break;
+  default:
+    sprintf(buffer,
+            "%d bottles of beer on the wall, "
+            "%d bottles of beer.\n"
+            "Take one down and pass it around, "
+            "%d bottles of beer on the wall.\n",
+            number, number, number - 1);
+    break;
+  }
 }
 
-void sing(char *buffer, int start, int end) {
-  int i;
+void sing(char* buffer, int start, int end) {
+  char tmp[1024] = {0};
   buffer[0] = '\0';
-  for (i = start; i >= end; i--) {
-    verse(buffer + strlen(buffer), i);
-    size_t len = strlen(buffer);
-    buffer[len] = '\n';
-    buffer[len + 1] = '\0';
+  for (int i = start; i >= end; i--) {
+    verse(tmp, i);
+    strcat(buffer, tmp);
+    if (i > end)
+      strcat(buffer, "\n");
   }
 }
