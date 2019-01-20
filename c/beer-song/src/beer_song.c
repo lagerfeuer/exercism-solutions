@@ -3,6 +3,8 @@
 #include <string.h>
 
 void verse(char* buffer, int number) {
+  if (number < 0)
+    return;
   switch (number) {
   case 0:
     sprintf(buffer, "No more bottles of beer on the wall, "
@@ -34,6 +36,8 @@ void verse(char* buffer, int number) {
 }
 
 void sing(char* buffer, int start, int end) {
+  if (start < 0 || end < 0)
+    return;
   char tmp[1024] = {0};
   buffer[0] = '\0';
   for (int i = start; i >= end; i--) {
