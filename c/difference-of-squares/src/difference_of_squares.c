@@ -1,16 +1,12 @@
 #include "difference_of_squares.h"
 
 unsigned long long square_of_sum(unsigned int n) {
-  unsigned long long total = 0;
-  for(unsigned int i = 0; i <= n; i++)
-    total += i;
+  unsigned long long total = (n * (n + 1)) / 2;
   return total * total;
 }
 
 unsigned long long sum_of_squares(unsigned int n) {
-  unsigned long long total = 0;
-  for(unsigned int i = 0; i <= n; i++)
-    total += (i * i);
+  unsigned long long total = (n * (n + 1) * (2 * n + 1)) / 6;
   return total;
 }
 
