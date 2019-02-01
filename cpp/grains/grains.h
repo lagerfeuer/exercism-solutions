@@ -1,4 +1,9 @@
+#pragma once
+
 namespace grains {
-unsigned long long square(unsigned int field);
-unsigned long long total();
+constexpr unsigned long long square(const unsigned int field) {
+  return 1ULL << (field - 1);
+}
+
+constexpr unsigned long long total() { return square(64) * 2 - 1; }
 } // namespace grains
