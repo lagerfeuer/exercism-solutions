@@ -6,7 +6,7 @@ int* binary_search(int element, int* arr, unsigned int length) {
     return NULL;
 
   int* start = arr;
-  int* end = arr + length;
+  int* end = arr + length - 1;
   int* middle;
 
   while (start <= end) {
