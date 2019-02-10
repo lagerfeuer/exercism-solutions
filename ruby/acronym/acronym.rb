@@ -1,6 +1,6 @@
 class Acronym
   def self.abbreviate(name)
-    name.tr(',-.', ' ').split.map{ |e| e[0] }.join.upcase
+    name.scan(/\b\w/).join.upcase
   end
 end
 
