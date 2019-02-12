@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+static struct r_mapping c_table[] = {{'I', 1},   {'V', 5},   {'X', 10},
+                                     {'L', 50},  {'C', 100}, {'D', 500},
+                                     {'M', 1000}};
+
 char* to_roman_numeral(unsigned int number) {
   char* roman = malloc(64 * sizeof(char));
   if (!roman)
