@@ -7,9 +7,7 @@ class Series
     raise ArgumentError if @series.length < size
 
     slices = []
-    (0..(@series.length - size)).each do |i|
-      slices << @series[i, size]
-    end
+    @series.chars.each_cons(size) { |e| slices << e.join }
     slices
   end
 end
