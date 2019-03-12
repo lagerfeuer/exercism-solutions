@@ -14,7 +14,7 @@ void get_allergens(int score, allergen_list_t* list) {
     return;
 
   while (allergen_score <= 128) {
-    if (score & allergen_score) {
+    if (is_allergic_to(allergen_index, score)) {
       list->allergens[list->count++] = allergen_index;
     }
     allergen_score <<= 1;
