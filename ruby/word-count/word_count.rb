@@ -1,11 +1,18 @@
 class Phrase
   def initialize(phrase)
-    @phrase = phrase
+    @phrase = normalize(phrase)
   end
 
   def word_count
-    map = Hash.new(0)
-    @phrase.downcase.scan(/\b\w*'?\w/).select { |e| map[e] += 1 }
-    map
+    @phrase.each_with_object(Hash.new(0)) do |e, h|
+      h[e] += 1
+      h
+    end
+  end
+
+  private
+
+  def normalize(phrase)
+    phrase.downcase.scan(/\b\w*'?\w/)
   end
 end
