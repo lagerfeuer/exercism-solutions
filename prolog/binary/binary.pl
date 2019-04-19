@@ -3,7 +3,7 @@ binary(Str, Dec) :-
     binaryChars(Chars, Dec).
 
 check(Num) :-
-    (Num is 0; Num is 1; fail), !.
+    (Num is 0; Num is 1), !.
 
 binaryChars([], 0).
 binaryChars([S|Str], Dec) :-
