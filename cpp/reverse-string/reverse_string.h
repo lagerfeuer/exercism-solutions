@@ -2,5 +2,5 @@
 #include <string>
 
 namespace reverse_string {
-std::string reverse_string(const std::string orig);
+std::string reverse_string(const std::string& orig);
 }
