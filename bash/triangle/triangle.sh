@@ -15,7 +15,7 @@ is_isosceles () {
 main() {
   if ! is_valid_triangle "$2" "$3" "$4"; then
     echo "false"
-    exit 1
+    exit 0
   fi
 
   case "$1" in
@@ -34,7 +34,6 @@ main() {
     echo "true"
   else
     echo "false"
-    exit 1
   fi
 }
 
