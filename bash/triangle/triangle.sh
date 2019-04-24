@@ -1,22 +1,15 @@
 #!/bin/bash
 
+is_valid_triangle () {
+  (( !( $1 + $2 < $3 || $1 + $3 < $2 || $2 + $3 < $1 ) && $1 > 0))
+}
+
 is_equilateral () {
-  (( $1 == $2 && $2 == $3 && $1 > 0 ))
+  (( $1 == $2 && $2 == $3 ))
 }
 
 is_isosceles () {
-  if (( $1 == $2 || $1 == $3 || $2 == $3 )); then
-    return 0
-  else
-    return 1
-  fi
-}
-
-is_valid_triangle () {
-  if (( $1 + $2 < $3 || $1 + $3 < $2 || $2 + $3 < $1 )); then
-    return 1
-  fi
-  return 0
+  (( $1 == $2 || $1 == $3 || $2 == $3 ))
 }
 
 main() {
@@ -37,7 +30,7 @@ main() {
       ;;
   esac
 
-  if [[ "$?" -eq 0 ]]; then
+  if (( $? == 0 )); then
     echo "true"
   else
     echo "false"
