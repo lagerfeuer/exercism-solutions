@@ -1,10 +1,10 @@
 REGEXPs = {
-  "words" => /\b\w*'?\w/
+  words: /\b\w*'?\w/
 }
 
 class Phrase
   def initialize(phrase)
-    @phrase = phrase.downcase.scan(REGEXPs["words"])
+    @phrase = phrase.downcase.scan(REGEXPs[:words])
   end
 
   def word_count
