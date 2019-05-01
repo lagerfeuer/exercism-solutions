@@ -4,16 +4,12 @@ input="${1,,}"
 declare -A letters
 for (( i = 0; i < ${#1}; i++ )); do
   letter="${input:i:1}"
-  if [[ ${letters[$letter]} ]]; then
-    ((letters[$letter]++))
-  else
-    letters[$letter]=1
-  fi
+  (( 'letters[$letter]'++ ))
 done
 
 result=""
 dict=("$2")
-for original_word in ${dict[*]}; do
+for original_word in ${dict[@]}; do
   word="${original_word,,}"
   if [[ "$word" == "$input" ]]; then
     continue
@@ -21,27 +17,22 @@ for original_word in ${dict[*]}; do
 
   declare -A used_letters
   for (( i = 0; i < ${#word}; i++)); do
-    letter="${word:i:1}"
-    if [[ ! ${used_letters[$letter]} ]]; then
-      used_letters[$letter]=1
-    else
-      ((used_letters[$letter]++))
-    fi
+    (( 'used_letters[${word:i:1}]'++ ))
   done
 
   found=1
-  for c in ${!letters[*]}; do
-    if [[ "${letters[$c]}" -ne "${used_letters[$c]}" ]]; then
+  for c in "${!letters[@]}"; do
+    if (( letters[$c] != used_letters[$c] )); then
       found=0
     fi
   done
-  for c in ${!used_letters[*]}; do
-    if [[ "${letters[$c]}" -ne "${used_letters[$c]}" ]]; then
+  for c in "${!used_letters[@]}"; do
+    if (( letters[$c] != used_letters[$c] )); then
       found=0
     fi
   done
 
-  if [[ found -eq 1 ]]; then
+  if (( found == 1 )); then
     if [[ ! -z $result ]]; then
       result+=" "
     fi
@@ -51,5 +42,4 @@ for original_word in ${dict[*]}; do
   unset -v 'used_letters'
 done
 
-    
 echo "$result"
