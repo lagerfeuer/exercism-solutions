@@ -2,8 +2,8 @@ binary(Str, Dec) :-
     string_chars(Str, Chars),
     binaryChars(Chars, Dec).
 
-check(Num) :-
-    (Num is 0; Num is 1), !.
+check(0).
+check(1).
 
 binaryChars([], 0).
 binaryChars([S|Str], Dec) :-
