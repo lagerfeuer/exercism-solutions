@@ -3,8 +3,7 @@ module gigasecond;
 import std.datetime;
 
 DateTime gsAnniversary (const DateTime dt){
-  auto dt_new = dt;
-  return (dt_new + 1000000000.seconds);
+  return dt + 1000000000.seconds;
 };
 
 unittest {
