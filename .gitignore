@@ -9,6 +9,7 @@ build/
 
 # D
 .dub/
+*-test-library
 
 # Java
 .gradle/
