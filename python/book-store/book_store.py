@@ -12,7 +12,7 @@ def cost(baskets):
     return sum(_cost(basket) for basket in baskets)
 
 
-def calculate_total(books):
+def total(books):
     groups = []
 
     # iterate over all books
