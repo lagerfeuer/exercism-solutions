@@ -5,10 +5,10 @@
 
 namespace pangram {
 bool is_pangram(const std::string sentence) {
-  std::set<unsigned char> alphas;
+  std::set<unsigned char> letters;
   for(const unsigned char& c : sentence)
     if(std::isalpha(c))
-      alphas.insert(std::tolower(c));
-  return alphas.size() == 26;
+      letters.insert(std::tolower(c));
+  return letters.size() == 26;
 }
 } // namespace pangram
