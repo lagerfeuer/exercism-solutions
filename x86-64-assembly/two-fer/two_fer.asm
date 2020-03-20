@@ -34,7 +34,8 @@ name:
   call strcat ; dst = strcat(msg_end, dst)
 
 ; RETURN
-  jmp return
+  mov rax, r9  ; set return value
+  ret
 
 ; char* strcat(char* src, char* dst)
 ; returns (dst + strlen(src))
@@ -51,9 +52,4 @@ strcat:
   jmp .loop
 .done:
   mov rax, rdx ; return last char of dst
-  ret
-
-return:
-  mov rax, r9  ; set return value
-
   ret
