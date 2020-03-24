@@ -1,12 +1,12 @@
 #include "pangram.h"
 #include <algorithm>
 #include <cctype>
-#include <set>
+#include <unordered_set>
 
 namespace pangram {
-bool is_pangram(const std::string sentence) {
-  std::set<unsigned char> letters;
-  for(const unsigned char& c : sentence)
+bool is_pangram(const std::string& sentence) {
+  std::unordered_set<unsigned char> letters;
+  for(const unsigned char c : sentence)
     if(std::isalpha(c))
       letters.insert(std::tolower(c));
   return letters.size() == 26;
