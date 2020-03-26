@@ -15,7 +15,7 @@ leap_year:
 
     ; div 100
     mov rax, rdi
-    mov rdx, 0
+    xor rdx, rdx
     mov rcx, 100
     div rcx       ; RDX:RAX DIV 100 => RAX(quotient):RDX(remainder)
     not rax       ; return value = true
@@ -24,7 +24,7 @@ leap_year:
 
     ; div 400
     mov rax, rdi
-    mov rdx, 0
+    xor rdx, rdx
     mov rcx, 400
     div rcx       ; RDX:RAX DIV 400 => RAX(quotient):RDX(remainder)
     xor rax, rax  ; return value = false
