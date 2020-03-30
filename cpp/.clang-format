@@ -1,5 +1,6 @@
 BasedOnStyle: LLVM
-IndentWidth: 4
-PointerBindsToType: true
+AlwaysBreakTemplateDeclarations: true
 FixNamespaceComments: true
-NamespaceIndentation: NI_All
+IndentWidth: 2
+NamespaceIndentation: All
+PointerBindsToType: true
