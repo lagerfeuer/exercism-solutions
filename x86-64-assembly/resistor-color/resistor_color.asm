@@ -20,8 +20,8 @@ color_code:
   xor rcx, rcx
   lea rdx, [rel array]
 .loop:
-  cmp rdx, 0
-  je .done
+  test rdx, rdx
+  jz .done
   mov rsi, [rdx+rcx]       ; current = array + counter
   call compare             ; strcmp(input, current)
   test rax, rax            ; match?
@@ -35,7 +35,7 @@ color_code:
 
 global colors
 colors:
-  mov rax, array ; return array
+  lea rax, [rel array] ; return array
   ret
 
 
@@ -45,8 +45,8 @@ compare:
   xor rax, rax
 .loop:
   ; load and compare
-  mov r10b, byte [r8]
-  mov r11b, byte [r9]
+  movzx r10, byte [r8]
+  movzx r11, byte [r9]
   cmp r10b, r11b
   jne .neq
   ; check for NULL byte
